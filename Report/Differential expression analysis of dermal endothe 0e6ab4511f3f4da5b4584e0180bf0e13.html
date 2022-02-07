@@ -1,0 +1,823 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Differential expression analysis of dermal endothelial cells of healthy and type 2 diabetic patients </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+}
+
+.simple-table-header {
+	background: rgb(247, 246, 243);
+	color: black;
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="686675aa-3661-4a1a-ac5e-2ee4eea98f0f" class="page serif"><header><h1 class="page-title">Differential expression analysis of dermal endothelial cells of healthy and type 2 diabetic patients </h1></header><div class="page-body"><p id="57472b6c-21f0-48bc-9586-0362fe524869" class="">Date: February 5th, 2022</p><p id="3206d91c-e244-47f7-8a6b-c7870f8e0338" class="">Author: <a href="https://daianna21.github.io/">Daianna González Padilla </a></p><p id="31211dbb-eb01-41a0-8139-5165505e6e4d" class="">Subject: RNAseq data analysis </p><p id="77d280f2-b44a-493c-8a13-d5220f85f228" class="">
+</p><p id="04f4782b-cb81-4085-b3c7-960cd4b328cb" class=""><strong>Content</strong></p><nav id="6f6efeb3-2e79-40cc-982c-1c2e9110bce8" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c11e3edd-098d-4ba5-aaab-055df38b2d70">1. Abstract</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a0b29581-6557-4c36-a33c-39593bea1a8f">2. Objetive</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8e7b5544-0036-4a61-b762-2677d2c2616a">3. Motivation</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#539293ab-37dd-4033-a05e-75607f163e3b">4. Results</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e286f5a1-aa32-47d1-b7be-1d894a96bdb0">5. Data</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d6f29a9f-dedf-4847-bd5c-9829774e880d">6. <strong>Installations</strong></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1b6e5790-746e-4807-8643-40f73b1903da">7. Methodology </a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#1f319f01-5c34-48b2-b45e-ea1ad5806328">7.1 Obtain data and <em>RangedSummarizedExperiment</em> R object</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#3aee756d-d3e5-473d-aba6-0163bd2f6a2f">7.2 Exploratory Data Analysis and Quality Control</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c004bc00-2076-4764-a6ea-a3b80ebf9e10">7.3 Data Normalization</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#98be052d-db8b-4a09-90ec-ca430de011cb">7.4 Differential Gene Expression Analysis</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#113fec8d-5482-4a4a-924f-5c6ed44ff083">8. Conclusion</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#a3850643-0e6c-4c93-891b-8564712322c9">9. Discussion and future prospects</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#19daea42-fb44-4f2f-a7c5-3a6d985f22eb">10. References </a></div></nav><h2 id="c11e3edd-098d-4ba5-aaab-055df38b2d70" class="">1. Abstract</h2><p id="8aa9838a-1706-4b2b-8e50-8fc4a444f636" class="">This study accomplish a differential expression analysis of RNAseq data from isolated dermal endothelial cells from diabetic and control patients.</p><h2 id="a0b29581-6557-4c36-a33c-39593bea1a8f" class="">2. Objetive</h2><p id="fbe2fb5d-2148-4367-9127-6b6b934977b2" class="">The main objective is to identify differentialy expressed genes between healthy and diabetic  patients in order to gain biological insights into its possible role in processes affected by diabetes and ultimately target those genes or processes for therapeutic and pharmaceutic approaches. </p><h2 id="8e7b5544-0036-4a61-b762-2677d2c2616a" class="">3. Motivation</h2><p id="116fd56b-e4eb-4a9d-9e83-6c70661ca4cc" class="">According to the <a href="https://www.who.int/publications/i/item/9789241565257">first </a><a href="https://www.who.int/publications/i/item/9789241565257"><em>Global report on diabetes</em></a><em> </em>of the World Health Organization (WHO), the number of adults living with diabetes has almost quadrupled since 1980 to 422 million adults. This dramatic rise is largely due to the rise in type 2 diabetes [<a href="https://www.who.int/publications/i/item/9789241565257">1</a>]. </p><p id="a64231d8-1ce6-40f3-a52a-4990f4928d01" class="">Since diabetes has a high prevalence in the whole world and is a major cause of blindness, kidney failure, heart attacks, stroke and lower limb amputation, this disease has been one of the most studied and an important approach to understand its genetic fundaments is transcriptomics. RNAseq data analysis such as the one presented here are important to establish a complete biological scenario of diabetes causes and implicated processes. </p><h2 id="539293ab-37dd-4033-a05e-75607f163e3b" class="">4. Results</h2><p id="8547b562-db83-42b6-bac9-1107959de29f" class="">This analysis took the linear model <em>Y ~ Intercept + Disease state + Gender</em> to model gene expression and  showed that there are 72 DE genes between healthy and diabetic patients, some implicated  in insulin signaling. Most of the DE genes in diabetic patients are downregulated and KRT10 gene is highly upregulated in healthy controls.</p><h2 id="e286f5a1-aa32-47d1-b7be-1d894a96bdb0" class="">5. Data</h2><p id="bfba0b4e-cc5c-42fc-9a4e-ebb30f7d7996" class="">RNAseq data used is available on R package <code>recount3</code> as “SRP095512” project of type <em>data_source, </em>from <em>human</em>, with <em>gene</em> as data type and<em> gencode_v26</em> as selected annotation. This data are part of just one <em>assay </em>describing RNA expression data for 63,856 <em>genes</em> along 10 <em>samples</em> corresponding to isolated dermal endothelial cells from 4 diabetic patients (Pat) and 6 control individuals (Ctrl). A deeper description of this data is found in <code>recount3</code> Study Explorer<strong> </strong>and within the same data.</p><h2 id="d6f29a9f-dedf-4847-bd5c-9829774e880d" class="">6. <strong>Installations</strong></h2><p id="a92e96d1-5392-4b49-8f27-6c039a14b463" class="">Install R 4.0.x or RStudio version 1.4 (or newer) and Bioconductor R packages.</p><h2 id="1b6e5790-746e-4807-8643-40f73b1903da" class="">7. Methodology </h2><h3 id="1f319f01-5c34-48b2-b45e-ea1ad5806328" class="">7.1 Obtain data and <em>RangedSummarizedExperiment</em> R object</h3><p id="ba7ba481-68b7-4511-a204-233b34e21fe3" class="">Intuitively, the first step to analyze RNAseq data is to import the data through <code>recount3 </code>R package. After that, a <code>RangedSummarizedExperiment</code> (RSE) object must be created with the data to analyze them in matrix-like containers called assays where rows represent ranges of interest (genes in this case) and columns represent samples (patients isolated cells in this case). </p><pre id="683fa2a6-051f-4757-b63e-c3d27ee88082" class="code"><code>## Load recount3 R/Bioconductor package
+library(&quot;recount3&quot;)
+## Get all human projects available in recount3
+human_projects &lt;- available_projects()
+## Find interest project
+proj_info &lt;- subset(
+    human_projects,
+    project == &quot;SRP095512&quot; &amp; project_type == &quot;data_sources&quot;
+)
+## Create a RangedSummarizedExperiment (RSE) object
+rse_gene_SRP095512 &lt;- create_rse(proj_info)
+
+## Convert raw counts to read counts 
+assay(rse_gene_SRP095512, &quot;counts&quot;) &lt;- compute_read_counts(rse_gene_SRP095512)</code></pre><h3 id="3aee756d-d3e5-473d-aba6-0163bd2f6a2f" class="">7.2 Exploratory Data Analysis and Quality Control</h3><p id="989f3b4b-f379-47ae-a3ee-af2d27f581f2" class="">Once the RSE object is created, the next step is to explore the relation between the samples variables to assess overall similarity between them. This is a useful step to determine at first sight which samples are different and similar to each other, if that fits the expectation from the experiment design and to identify the major sources of variation [<a href="https://hbctraining.github.io/Training-modules/planning_successful_rnaseq/lessons/sample_level_QC.html">3</a>]. This information helps to create a design model in future steps for DE analysis.</p><pre id="d23059b9-23e5-4dc5-9d27-bff0c215e541" class="code"><code>## Check samples attributes
+rse_gene_SRP095512$sra.sample_attributes
+## [1] &quot;cell type;;endothelial cell|disease state;;Healthy control|gender;;female|source_name;;dermal blood endothelial cell&quot; 
+## [2] &quot;cell type;;endothelial cell|disease state;;Diabetic Patient|gender;;male|source_name;;dermal blood endothelial cell&quot;  
+## ...
+##[10] &quot;cell type;;endothelial cell|disease state;;Healthy control|gender;;female|source_name;;dermal blood endothelial cell&quot; 
+
+## Expand samples attributes to access them
+rse_gene_SRP095512 &lt;- expand_sra_attributes(rse_gene_SRP095512)
+
+## Check samples information
+colnames(colData(rse_gene_SRP095512))</code></pre><p id="e0b282cc-1632-4159-b591-9f0ef68784b9" class="">As shown above, variable attributes of the samples are disease state and gender, and those are the ones to compare. Within sample information columns there are not variables describing directly the conditions of the samples but the experiment and libraries attributes.  </p><p id="fbcd7ccb-c60d-4221-a5e5-900b6de9c55f" class="">Below samples are plotted on a two-dimensional scatterplot so that distances on the plot approximate the expression differences between the samples, so the hypothesis is that samples that belong to the same condition will be closer to each other and farther from the other conditions samples, only if these conditions determine different expression profiles . Both plots are the same, only the samples labels change in order to make same condition samples clusters more visible and obvious.</p><pre id="31ce3a68-b918-49bc-9b23-d1d1ff9cb43b" class="code"><code>library(&quot;RColorBrewer&quot;)
+## Each level of the condition is a different color
+col.group &lt;- factor(rse_gene_SRP095512$sra_attribute.gender)
+levels(col.group) &lt;- brewer.pal(nlevels(col.group), &quot;Set1&quot;)
+col.group
+## [1] #E41A1C #377EB8 #E41A1C #E41A1C #377EB8 #E41A1C #E41A1C #E41A1C #E41A1C #E41A1C
+## Levels: #E41A1C #377EB8 #4DAF4A
+
+## Colors are chars
+col.group &lt;- as.character(col.group)
+## MDS plot
+plotMDS(rse_gene_SRP095512, labels = rse_gene_SRP095512$sra_attribute.gender, col=col.group)
+</code></pre><figure id="0e6ab451-1f3f-4da5-b458-4e0180bf0e13" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/fe.png"><img style="width:480px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/fe.png"/></a></figure><p id="7aa64ab0-6ad6-47fe-905b-b9bbd6bb028d" class="">By looking at the above image it is possible to conclude that gender is not an differential expression indicator since samples from the same gender do not cluster together. Even though, gender stills an interest variable since women and men could show different diabetic propensity. In fact, it has been shown that men are almost twice as likely to develop type 2 diabetes as women [<a href="https://academic.oup.com/jcem/article/101/10/3740/2764924">2</a>]. </p><pre id="9c7ce229-0c64-470b-a8d6-eaf9477fa580" class="code"><code>col.group &lt;- factor(rse_gene_SRP095512$sra_attribute.disease_state)
+levels(col.group) &lt;- brewer.pal(nlevels(col.group), &quot;Set1&quot;)
+col.group
+col.group &lt;- as.character(col.group)
+## Labels now given by disease sta
+plotMDS(rse_gene_SRP095512, labels = rse_gene_SRP095512$sra_attribute.disease_state, col=col.group)</code></pre><p id="fb94e52a-f515-4e37-9dc2-08009ba2dcc8" class="">
+</p><figure id="68a2ba9d-fbae-42c2-8a00-8267e012fd20" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/ds.png"><img style="width:480px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/ds.png"/></a></figure><p id="4ec24a96-1e2b-4204-ad28-fbaea85dac03" class="">On the other hand, when samples labels are given by disease state, samples of healthy controls and diabetic patients group into two different groups at right and left, respectively. Thus, disease state works as a comparable condition that could explain differential gene expression.</p><p id="5052b915-e4f0-4dec-a410-909195afd5bd" class="">Once the condition of interest is determined, the next thing to do is to get rid of samples and genes that do not overcome the minimal established values for quality describing attributes.</p><p id="f68815ce-6d3b-4539-a14d-d16a03d3be2f" class="">Initially, quality control of samples could be given by their <em>gene assigned reads proportion</em> as a measurement of RNA reads that correspond to transcripts of the samples. The closer this value is to 1 the better the sample transcription levels support given by reads.</p><pre id="1898c83d-1527-4d80-9f16-339f0081b3ec" class="code"><code>## Calculate gene assigned reads proportion for each sample
+rse_gene_SRP095512$assigned_gene_prop &lt;- rse_gene_SRP095512$recount_qc.gene_fc_count_all.assigned / rse_gene_SRP095512$recount_qc.gene_fc_count_all.total
+## Calculate the minimum proportion accepted: Median -3(Standard Deviation)
+median(rse_gene_SRP095512$assigned_gene_prop)-3*sd(rse_gene_SRP095512$assigned_gene_prop)
+## [1] 0.3239964
+
+## General information of samples proportions
+summary(rse_gene_SRP095512$assigned_gene_prop)
+## Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+## 0.3665  0.4902  0.5349  0.5189  0.5608  0.6074
+
+## Visualize graphically the frequency of samples proportions
+hist(rse_gene_SRP095512$assigned_gene_prop)</code></pre><figure id="b5f7fd8a-fed6-4fae-97ae-d16121b9d128" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/ag.png"><img style="width:432px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/ag.png"/></a></figure><p id="cc0f8edd-1062-4c85-ae5c-8dab18aa4832" class="">Since the minimum proportion value of the samples (0.3665) is greater than the minimum accepted value (0.32399), all samples are kept, as shown below.</p><pre id="eba964da-be94-450d-99b8-f3b617955f66" class="code"><code>## Samples with gene assigned proportion smaller than 0.32399
+table(rse_gene_SRP095512$assigned_gene_prop &lt; 0.32399)
+## FALSE
+## 10</code></pre><p id="06cc8313-2c6e-4f49-9893-99561aeedcd1" class="">Subsequently, an examination of differences between gene assigned reads proportions of disease state (cases and controls) groups is useful as a first clue to determine if there are huge differences in samples quality among these groups that could affect the differential expression results. </p><pre id="2a7e56d3-72da-4402-affd-98eaf2aba51b" class="code"><code>## Gene assigned reads proportion for control and cases samples
+tapply(rse_gene_SRP095512$assigned_gene_prop, rse_gene_SRP095512$sra_attribute.disease_state, summary)
+## $`Diabetic Patient`
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.4544  0.5260  0.5503  0.5298  0.5541  0.5641 
+
+## $`Healthy control`
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##  0.3665  0.4902  0.5156  0.5116  0.5659  0.6074
+
+## Boxplot of gene assigned reads proportion of controls and cases samples
+library(&quot;ggplot2&quot;)
+ggplot(as.data.frame(colData(rse_gene_SRP095512)), aes(y = assigned_gene_prop, x = sra_attribute.disease_state)) +
+     geom_boxplot() +
+     theme_bw(base_size = 20) +
+     ylab(&quot;Assigned Gene Prop&quot;) +
+     xlab(&quot;Group&quot;)</code></pre><figure id="a9249dd2-782b-4a4d-af03-26f44f33f363" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/efw.png"><img style="width:432px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/efw.png"/></a></figure><p id="ef2a5f90-2450-46b7-ad25-6ac12ee9197c" class="">As shown above, no huge differences between the groups proportions is found and both have good quality samples. Nevertheless, a slight difference exists and that could account for those minority differentially expressed genes in the samples that lead to greater or smaller mRNA levels within samples. </p><p id="0af41e9c-1180-43e7-a059-72e8cbd92390" class="">Secondly, gene quality must be verified as well. To do that, it necessary to take into account the <em>mean expression level</em> of each gene. </p><pre id="f48eb9a3-354a-4e13-90ac-acf094374213" class="code code-wrap"><code>## Mean of expression levels of each gene
+gene_means &lt;- rowMeans(assay(rse_gene_SRP095512, &quot;counts&quot;))
+summary(gene_means)
+##  Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##  0.0      0.0      0.6    277.5     35.2 884351.6 
+
+## Number of genes with the first expression values
+head(table(gene_means))
+## gene_means
+##     0   0.1   0.2   0.3   0.4   0.5 
+## 22606  3700  2189  1403  1141   879
+</code></pre><p id="44659762-63ad-4815-93b2-596a38c39755" class="">The zero value for the first quartile of the mean expression levels of the genes lies in the fact that there are 22,606 of 63,856 total genes with mean expression zero, which means that around the 35% of genes have no expression values. Hence, those genes are discarded.</p><pre id="be3df32f-b4ad-4af6-ad00-8ed17ce71955" class="code"><code>## Hold genes with mean expression greater than 0
+rse_gene_SRP095512 &lt;- rse_gene_SRP095512[gene_means &gt;= 0.1, ]
+## New dimensions
+dim(rse_gene_SRP095512)
+## [1] 41250    10</code></pre><h3 id="c004bc00-2076-4764-a6ea-a3b80ebf9e10" class="">7.3 Data Normalization</h3><p id="fbc51909-9d36-4ddc-a050-ea7e4c1a2c70" class="">The following step is to normalize the data for posterior differential expression analysis accounting for differences in library sizes given by sequencing depth, gene length and RNA composition of samples (<em>composition bias</em>) [<a href="https://hbctraining.github.io/Training-modules/planning_successful_rnaseq/lessons/sample_level_QC.html">3</a>]. This is a necessary step to make accurate comparisons of gene expression between samples. </p><p id="a649b135-b935-4d8d-a0ef-4d94d60463f8" class="">This is achieved through <code>edgeR</code> library which is able to estimate biological variation between replicate libraries and to conduct exact tests of significance.</p><pre id="86d2a5a9-6b74-44c8-9845-563e1f3d50bd" class="code"><code>## Load the necessary library
+library(&quot;edgeR&quot;)
+## Convert RSE object into a DGElist object to analyze it through edgeR
+dge &lt;- DGEList(
+    counts = assay(rse_gene_SRP095512, &quot;counts&quot;),
+    genes = rowData(rse_gene_SRP095512)
+)
+## Calculate scaling factors to convert raw library sizes into effective library sizes
+dge &lt;- calcNormFactors(dge)</code></pre><h3 id="98be052d-db8b-4a09-90ec-ca430de011cb" class="">7.4 Differential Gene Expression Analysis</h3><p id="6c30dcbf-82c0-4dc8-86bf-ec6b9c0d1f61" class=""> The next step in the RNA-seq workflow is the differential expression analysis. The goal of differential expression testing is to determine which genes are expressed at different levels between conditions, in this case, between healthy and diabetic patients.</p><p id="c532806e-acb1-4814-9887-afcffff8b91f" class="">Fistable, a review of the samples variables integrity is necessary to discard the ones that are not informative or incomplete. </p><pre id="9dbaf0fa-76be-47db-af9b-fb0726f64ce4" class="code"><code>## Check samples variables integrity
+table(rse_gene_SRP095512$sra_attribute.gender)
+## female   male 
+##     8      2 
+table(rse_gene_SRP095512$sra_attribute.cell_type)
+## endothelial cell 
+##              10 
+table(rse_gene_SRP095512$sra_attribute.disease_state)
+## Diabetic Patient  Healthy control 
+##               4                6 
+table(rse_gene_SRP095512$sra_attribute.source_name)
+## dermal blood endothelial cell 
+##                           10</code></pre><p id="912b2a33-158c-483d-b3f9-5708d846af6c" class="">As already mentioned earlier, only disease state and gender present variation between samples and are therefore informative. They are also complete since all samples fall into one of their categories. </p><p id="804cbb6c-1952-4a85-ab8b-2a247714f03f" class="">Then, a regression model is created to model the expression of each gene as a linear combination of variables or explanatory factors from the samples: disease state and gender in this study. The outcome or response variable is the gene expression which depends on the factors parameters or coefficients estimated from the data. </p><p id="7b707638-d13e-48f3-ab32-d11c4084b6f2" class="">Categorical data such as disease state and gender are represented as numerical variables through <em>dummy variables </em>(as 0s and 1s)<em> </em>with<code> model.matrix</code>, taking one as the reference and the rest as contrast.</p><pre id="6db2ba6e-c281-43d8-b531-94d6581618e4" class="code code-wrap"><code>## Create the model Y ~ interceot + disease state + gender
+mod &lt;- model.matrix(~ sra_attribute.disease_state + sra_attribute.gender,
+    data = colData(rse_gene_SRP095512)
+)</code></pre><p id="63017bfa-aa73-444d-bad7-527f51386fd5" class="">Before using the model to get DE genes, it is important to determine if the matrix is<em> full rank</em> to avoid redundancy in the model parameters: columns must be linearly independent to estimate the coefficients values. </p><pre id="3f080ce0-f90a-496b-b188-616fad47aaf2" class="code"><code>## Matrix rank must equal the number of columns
+qr(mod)$rank==ncol(mod)
+## [1] TRUE</code></pre><p id="cdf82920-20e0-4bd5-a0a2-fd10d1709f89" class="">This full rank matrix makes possible to continue with DE analysis and is also possible to visualize the matrix model design.</p><pre id="b20667ba-08ff-47f2-beea-7d9eaa7ce129" class="code"><code>## Visualize the design of the matrix model 
+vd &lt;- ExploreModelMatrix::VisualizeDesign(
+    sampleData = colData(rse_gene_SRP095512),
+    designFormula = ~ sra_attribute.disease_state + sra_attribute.gender,
+    textSizeFitted = 4
+)
+cowplot::plot_grid(plotlist = vd$plotlist)
+</code></pre><figure id="03583cec-8f8f-40dc-9279-fd994288c11c" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/gf.png"><img style="width:672px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/gf.png"/></a></figure><p id="7af2b270-a22b-4ed2-9d3f-7bd7e904a04f" class="">The above image makes easier to distinguish female and diabetic variables as references whose value is 0 and male and healthy variables as controls whose value is 1. In that way, just by resting the intercept value to healthy female and diabteic male coefficients, their values are obtained.</p><p id="7107ab0b-0023-4a55-8889-4233ff8cb4ac" class="">Once the linear model is created <code>limma</code> library uses it to realize the DGE analysis based on a NB distibution to model read counts and estimate gene expression variance which is essential to determine whether the changes are due to chance [<a href="https://divingintogeneticsandgenomics.rbind.io/#about">4</a>,<a href="http://bridgeslab.sph.umich.edu/posts/why-do-we-use-the-negative-binomial-distribution-for-rnaseq">5</a>].</p><p id="20727c33-5fa4-46e3-97a8-e9e2990dc7d6" class="">First, <mark class="highlight-teal"><code>voom</code></mark> function estimates mean-variance relationship in the data prior to linear modelling in <code>limma</code>, then use this to compute appropriate weights for each observation [<a href="https://www.rdocumentation.org/packages/limma/versions/3.28.14/topics/voom">6</a>].</p><pre id="a1ccda07-b42d-462c-b703-ee625c7f117c" class="code code-wrap"><code>library(&quot;limma&quot;)
+## Estimate and plot mean-variance relation
+vGene &lt;- voom(dge, mod, plot = TRUE)</code></pre><figure id="c73e6584-2230-4121-a6e3-705b714511e2" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/vo.png"><img style="width:480px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/vo.png"/></a></figure><p id="399878a8-7793-4fd1-8624-ea71c82a84c7" class="">After that, the linear model fit is produced by <code>lmFit</code> and is taken by <code>eBayes</code>  to compute<em> t-statistics </em>and<em> F-statistic</em> to measure the size of  gene expression difference relative to the variation in the sample data. The greater these value are, the greater the evidence for differentialy expressed genes between samples of healthy and diabetic patients.</p><pre id="37a96b6f-35b8-405c-9b1c-f33473e68471" class="code code-wrap"><code>## Linear model fit and t values for genes
+eb_results &lt;- eBayes(lmFit(vGene))
+## All DE genes with their t and p values for interest condition
+de_results &lt;- topTable(
+    eb_results,
+		## Index of the interest coefficient (disease state)
+    coef = 2,
+    number = nrow(rse_gene_SRP095512),
+		## Conserve the original order of genes
+    sort.by = &quot;none&quot;)
+dim(de_results)
+## [1] 41250    16</code></pre><p id="c19ccc00-ff99-4107-ab0a-e49e5bd7b514" class="">From the top ranked genes obtained above, only the ones with an adjusted p value smaller than 0.05 are considered DE genes so that the probability of observing those differences in their expression is not by chance but by disease state. </p><pre id="ff1f43aa-aeab-4d6f-8100-038334122d8b" class="code code-wrap"><code>## DE genes between controls and cases with adjusted p value &lt; 0.05
+table(de_results$adj.P.Val &lt; 0.05)
+## FALSE  TRUE 
+## 41178    72</code></pre><p id="045ff28b-77c0-4cce-b3bb-ec7e106c8617" class="">There are 72 DE genes that could account for the genetic differences between healthy and diabetic patients.</p><p id="e60a2781-a2ab-4935-9806-a26389c0275d" class="">Below there is a MA plot that shows the relation between the mean expression of genes and their fold change (log ratio) regarding these two different conditions. [<a href="https://www.reneshbedre.com/blog/ma.html">7]</a></p><pre id="67a5ede8-3304-4390-bad8-eff2b1a589c3" class="code"><code>## MA plot takes gene expression and disease state 
+limma::plotMA(eb_results, coef = 2)</code></pre><figure id="5e9bdce4-4b8b-4933-a1c6-29b85e752840" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/dss.png"><img style="width:480px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/dss.png"/></a></figure><p id="39074c5f-0d33-4fdc-9b30-e07fba6f68ba" class="">To make clearer where DE genes are in the MA plot, they are the only ones held and plotted. </p><pre id="fb618171-4fc1-48dc-8857-5e43d73d38bc" class="code"><code>## Hold only DE genes
+limma::plotMA(eb_results[which(de_results$adj.P.Val &lt; 0.05),], coef=2)</code></pre><figure id="c3cc1392-fc6f-4d46-9b28-841da9e2762e" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/de.png"><img style="width:480px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/de.png"/></a></figure><p id="42b8eb36-0c72-4180-81c4-892f66868642" class="">As seen in the plot, DE genes are the ones that point away from M=0 line, having positive and negative values for log fold change which is the same to have expression ratios far away from 1 so that they are upregulated and downregulated if they are above and below M=0 line, respectively.</p><p id="bf023988-5183-4912-9510-24ae5cec7242" class="">Even if MA plots help to visualize DGE, they do not consider statistical measures (<em>p</em> values or adjusted <em>p</em> values) and therefore can not take into account statistically significant differences between cases and controls. In that way, a volcano plot results convenient because it shows the relation between the negative logarithm of p-value and log fold of each gene. In this plots, DE genes have high values in y axis since they have low p values. </p><pre id="9ca3a50e-83e4-4c4d-8ce5-167770ea8718" class="code"><code>## Volcano plot showing the top 3 genes with lowest p values 
+volcanoplot(eb_results, coef = 2, highlight = 3, names = de_results$gene_name, cex=0.5, hl.col = &quot;orchid4&quot;)</code></pre><figure id="7bee06bc-f9d6-4ff0-bb9d-b0971debb2ea" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/VP.png"><img style="width:1366px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/VP.png"/></a></figure><pre id="72caeedf-1e85-4358-bb1d-426b79e76ee0" class="code"><code>## Hold only DE genes
+volcanoplot(eb_results[which(de_results$adj.P.Val &lt; 0.05),], coef = 2, highlight = 3, names = de_results[which(de_results$adj.P.Val &lt; 0.05), &quot;gene_name&quot;], cex=0.5, hl.col = &quot;orchid4&quot;, ylim=c(0,7))</code></pre><figure id="f75faf1c-ffb8-4542-a971-829e63004542" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/day.png"><img style="width:1366px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/day.png"/></a></figure><p id="9d5feb8c-700f-4395-b26a-c2adfee4a596" class="">Finally, a heatmap of DE genes expression levels across all samples is a simple way to visualize the way these genes present lower or bigger expression levels in one disease state with respect to the other. </p><p id="49e14d5f-6761-4661-82a7-23a4c3d055ab" class=""> </p><pre id="4a97f699-04cd-480d-b452-6445855c34be" class="code code-wrap"><code>## Expression of DE genes along the 10 samples
+exprs_heatmap &lt;- vGene$E[de_results$adj.P.Val &lt;= 0.05, ]
+## DE genes in de_results and vGene are in the same order
+identical(rownames(exprs_heatmap), de_results[de_results$adj.P.Val &lt;=0.05, &quot;gene_id&quot;])
+## [1] TRUE
+
+## DE genes names as row names of heatmap
+rownames(exprs_heatmap) &lt;- de_results[de_results$adj.P.Val &lt;=0.05, &quot;gene_name&quot;]
+## Data frame with interest variables of samples
+col_df &lt;- as.data.frame(colData(rse_gene_SRP095512)[,c(&quot;sra_attribute.disease_state&quot;,&quot;sra_attribute.gender&quot;)])
+colnames(col_df) &lt;- c(&quot;Disease state&quot;, &quot;Gender&quot;)
+## Heatmap with clustered rows and columns
+library(&quot;pheatmap&quot;)
+pheatmap(
+    exprs_heatmap,
+    cluster_rows = TRUE,
+    cluster_cols = TRUE,
+    show_rownames = TRUE,
+		fontsize_row = 5,
+    show_colnames = FALSE,
+    annotation_col = col_df
+)</code></pre><figure id="02f4e62e-7aba-4391-9ec8-470394eb94c6" class="image"><a href="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/hm.png"><img style="width:645px" src="Differential%20expression%20analysis%20of%20dermal%20endothe%200e6ab4511f3f4da5b4584e0180bf0e13/hm.png"/></a></figure><p id="7e048b71-3ae1-4d9b-9fe0-8410aa8ac42a" class="">
+</p><h2 id="113fec8d-5482-4a4a-924f-5c6ed44ff083" class="">8. Conclusion</h2><p id="f3f04be7-dea3-4786-85e1-1eca44bb6541" class="">On the one hand, this DE analysis demostrated that disease state is  efectively a factor that explains differences in transcriptomic profiles of healthy and diabetic patients. On the other hand, gender did not prove to be a determinant variable in this study.  From the DE genes found, 2 of the top 3 were  FDZ10, and WNK2, all downregulated in diabetic patients.</p><p id="1a9e6100-4235-4962-b81f-21953dff83c2" class="">WNK2 is a serine/threonine protein kinase that has been implicated in protein trafficking highly correlated with insulin resistance or diabetes. Accordingly to what this study revealed, it has been demostrated that the expression levels of WNK2 in skeletal muscle significantly decrease in <em>db/db </em>mice, a type II diabetic model, compared to that of wild type mice [<a href="https://faseb.onlinelibrary.wiley.com/doi/abs/10.1096/fasebj.29.1_supplement.lb706">8</a>]. FDZ10 is a Frizzled family protein that serves as receptor in the canonical β-catenin and noncanonical Wnt signaling pathways whose role in diabetes type 2 has been revealed [<a href="https://link.springer.com/article/10.1007/s11010-021-04086-5">9</a>].  These facts support the results here obtained.</p><p id="720dda65-aad3-4cfe-a7a3-81a60a061c83" class="">Undoubtly,  DE analysis are trascendent and have a relevant impact on the identification of genes and factors implicated in diabetes. </p><p id="f74de723-30bf-451f-9da1-869e1362f76f" class="">
+</p><h2 id="a3850643-0e6c-4c93-891b-8564712322c9" class="">9. Discussion and future prospects</h2><p id="4152a6bf-8b54-49e4-abe6-afbdfa446dc2" class="">Even if this study achieved its purpose, they are many other variables that could be integrated in the model that account for differential expression. Unfortunately, this data present limited sample information since it  do not contain information about RIN and patients age, which could be important factors.</p><p id="80b50c1f-87ae-4541-a1a9-be4072521cb0" class=""> Also variables such as race, food habits, physical activity and family history are relevant factors to model gene expression considering that diabetes is a multifactorial disease and is caused by both genetic and environmental factors . Future work must be accomplished considering all this variables  and taking data sets with more samples, specially,  diabetic male samples since all male in this study are healthy. Deeper analysis of these DE genes must be done in order to define its role in diabetes: if their changes in expression act as causal factors or they are only correlated somehow.  </p><p id="f98e7e86-535e-41b5-a663-ade0ffa128d1" class="">
+</p><h2 id="19daea42-fb44-4f2f-a7c5-3a6d985f22eb" class="">10. References </h2><ol type="1" id="dc42c78d-34ca-4880-8b97-aa4641bacb99" class="numbered-list" start="1"><li>World Health Organization (WHO). April 2019. <em>Global report on diabetes.</em> Web site: <a href="https://www.who.int/publications/i/item/9789241565257">Global report on diabetes (who.int)</a></li></ol><ol type="1" id="9c8a4e63-e217-4fc5-aed1-05d62f93b660" class="numbered-list" start="2"><li>Anna Nordström*, Jenny Hadrévi, Tommy Olsson, Paul W. Franks, Peter Nordström, <em>Higher Prevalence of Type 2 Diabetes in Men Than in Women Is Associated With Differences in Visceral Fat Mass, The Journal of Clinical Endocrinology &amp; Metabolism</em>, Volume 101, Issue 10, 1 October 2016, Pages 3740–3746, <a href="https://doi.org/10.1210/jc.2016-1915">https://doi.org/10.1210/jc.2016-1915</a></li></ol><ol type="1" id="b5b1ef4d-946b-4133-b32d-da948c3ec8a4" class="numbered-list" start="3"><li>HBC Training. (n.d.). <em>Differential gene expression (DGE) analysis</em>. Web site: <a href="https://hbctraining.github.io/Training-modules/planning_successful_rnaseq/lessons/sample_level_QC.html">Differential gene expression (DGE) analysis | Training-modules (hbctraining.github.io)</a></li></ol><ol type="1" id="b57f35a5-940c-4e1f-8263-436f6a3f5198" class="numbered-list" start="4"><li>Tang, M. November 2019.<em> Negative bionomial distribution in (single-cell) RNAseq</em>. Web site: <a href="https://divingintogeneticsandgenomics.rbind.io/#about">DNA confesses Data speak (rbind.io)</a></li></ol><ol type="1" id="d107c432-ea6d-4db6-937c-eb96034482df" class="numbered-list" start="5"><li>Bridges, D. (n.d.). <em>Why do we use the negative binomial distribution for analysing RNAseq data?</em> Web site: <a href="http://bridgeslab.sph.umich.edu/posts/why-do-we-use-the-negative-binomial-distribution-for-rnaseq">Why do we use the negative binomial distribution for RNAseq? (umich.edu)</a></li></ol><ol type="1" id="52cb81a7-87b7-4bd2-8dc8-19aedf6a948c" class="numbered-list" start="6"><li>RDocumentation. (n.d.). <em>voom: Transform RNA-Seq Data Ready for Linear Modelling</em>. Web site: <a href="https://www.rdocumentation.org/packages/limma/versions/3.28.14/topics/voom">voom function - RDocumentation</a></li></ol><ol type="1" id="3d8a09ce-0b31-4eeb-84cb-00c9ef67f5c9" class="numbered-list" start="7"><li>Data science blog. (n.d.)<em>. MA plot to visualize gene expression data using Python.</em> Web site: <a href="https://www.reneshbedre.com/blog/ma.html">MA plot to visualize gene expression data using Python (reneshbedre.com)</a></li></ol><ol type="1" id="70d678e9-a739-4a10-9bfc-b4b3aa6b5b19" class="numbered-list" start="8"><li>Kim, H., Kim, J. H., Hwang, K. H., Park, K. S., Cha, S. K., &amp; Kong, I. D. (2015). <em>Functional Expression of WNK Kinases and Insulin Signaling Effectors in Diabetic Skeletal Muscle. </em>The FASEB Journal, 29,LB706.</li></ol><ol type="1" id="3a250ef9-60dc-4192-9bdf-23c435ad68b3" class="numbered-list" start="9"><li>Chen, J., Ning, C., Mu, J. et al. <em>Role of Wnt signaling pathways in type 2 diabetes mellitus</em>. Mol Cell Biochem 476, 2219–2232 (2021)</li></ol><p id="18115af2-e93a-47d9-8639-94eca2c9970c" class="">
+</p></div></article></body></html>
