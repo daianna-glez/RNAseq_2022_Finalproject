@@ -214,3 +214,7 @@ pheatmap(
   show_colnames = FALSE,
   annotation_col = col_df
 )
+
+## Reproduce code in 120 chars
+options(width = 120)
+sessioninfo::session_info()
