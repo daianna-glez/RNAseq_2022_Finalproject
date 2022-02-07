@@ -54,8 +54,6 @@ rse_gene_SRP095512 <- expand_sra_attributes(rse_gene_SRP095512)
 ## Check samples' information
 colnames(colData(rse_gene_SRP095512))
 
-## Save unmodified data
-rse_gene_SRP095512_unfiltered <- rse_gene_SRP095512 
 ## Calculate gene assigned reads proportion for each sample
 rse_gene_SRP095512$assigned_gene_prop <- rse_gene_SRP095512$recount_qc.gene_fc_count_all.assigned / rse_gene_SRP095512$recount_qc.gene_fc_count_all.total
 ## Calculate the minimum proportion accepted: Median -3(Standard Deviation)
@@ -85,7 +83,6 @@ tapply(rse_gene_SRP095512$assigned_gene_prop, rse_gene_SRP095512$sra_attribute.d
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##  0.3665  0.4902  0.5156  0.5116  0.5659  0.6074
 
-## Expand attributes
 
 ## Boxplot of gene assigned reads proportion of controls and cases samples
 library("ggplot2")
@@ -116,7 +113,6 @@ dim(rse_gene_SRP095512)
 ## Load the necessary library
 library("edgeR")
 ## Convert RSE object into a DGElist object to analyze it through edgeR
-The DGEList object holds the dataset to be analysed by edgeR a
 dge <- DGEList(
   counts = assay(rse_gene_SRP095512, "counts"),
   genes = rowData(rse_gene_SRP095512)
