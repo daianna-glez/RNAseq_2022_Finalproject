@@ -35,25 +35,6 @@ rse_gene_SRP095512$sra.sample_attributes
 ## ...
 ##[10] "cell type;;endothelial cell|disease state;;Healthy control|gender;;female|source_name;;dermal blood endothelial cell" 
 
-## Expand samples' attributes to access them
-rse_gene_SRP095512 <- expand_sra_attributes(rse_gene_SRP095512)
-
-## Check samples' information
-colnames(colData(rse_gene_SRP095512))
-
-## Check samples’ attributes
-rse_gene_SRP095512$sra.sample_attributes
-## [1] "cell type;;endothelial cell|disease state;;Healthy control|gender;;female|source_name;;dermal blood endothelial cell" 
-## [2] "cell type;;endothelial cell|disease state;;Diabetic Patient|gender;;male|source_name;;dermal blood endothelial cell"  
-## ...
-##[10] "cell type;;endothelial cell|disease state;;Healthy control|gender;;female|source_name;;dermal blood endothelial cell" 
-
-## Expand samples' attributes to access them
-rse_gene_SRP095512 <- expand_sra_attributes(rse_gene_SRP095512)
-
-## Check samples' information
-colnames(colData(rse_gene_SRP095512))
-
 ## Calculate gene assigned reads proportion for each sample
 rse_gene_SRP095512$assigned_gene_prop <- rse_gene_SRP095512$recount_qc.gene_fc_count_all.assigned / rse_gene_SRP095512$recount_qc.gene_fc_count_all.total
 ## Calculate the minimum proportion accepted: Median -3(Standard Deviation)
