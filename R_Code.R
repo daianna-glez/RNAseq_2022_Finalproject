@@ -148,35 +148,21 @@ de_results <- topTable(
 dim(de_results)
 ## [1] 41250    16
 
-## Linear model fit and t values for genes
-eb_results <- eBayes(lmFit(vGene))
-## All DE genes with higher t and p values for interest condition
-de_results <- topTable(
-  eb_results,
-  ## Index of the interest coefficient (disease state)
-  coef = 2,
-  number = nrow(rse_gene_SRP095512),
-  ## Conserve the original order of genes
-  sort.by = "none")
-dim(de_results)
-## [1] 41250    16
-
 ## MA plot takes gene expression and disease state 
 limma::plotMA(eb_results, coef = 2)
 ## Hold only DE genes
 limma::plotMA(eb_results[which(de_results$adj.P.Val < 0.05),], coef=2)
 
+## Volcano plot showing the top 3 genes with lowest p values 
+volcanoplot(eb_results, coef = 2, highlight = 3, names = de_results$gene_name, cex=0.5, hl.col = "orchid4")
+## Hold only DE genes
+volcanoplot(eb_results[which(de_results$adj.P.Val < 0.05),], coef = 2, highlight = 3, names = de_results[which(de_results$adj.P.Val < 0.05), "gene_name"], cex=0.5, hl.col = "orchid4", ylim=c(0,7))
 
-## Hold only DE genes
-volcanoplot(eb_results[which(de_results$adj.P.Val < 0.05),], coef = 2, highlight = 3, names = de_results[which(de_results$adj.P.Val < 0.05), "gene_name"], cex=0.5, hl.col = "orchid4", ylim=c(0,7))
-## Hold only DE genes
-volcanoplot(eb_results[which(de_results$adj.P.Val < 0.05),], coef = 2, highlight = 3, names = de_results[which(de_results$adj.P.Val < 0.05), "gene_name"], cex=0.5, hl.col = "orchid4", ylim=c(0,7))
 
 ## Expression of DE genes along the 10 samples
 exprs_heatmap <- vGene$E[de_results$adj.P.Val <= 0.05, ]
 ## DE genes in de_results and vGene are in the same order
 identical(rownames(exprs_heatmap), de_results[de_results$adj.P.Val <=0.05, "gene_id"])
-
 
 ## DE genes names as row names of heatmap
 rownames(exprs_heatmap) <- de_results[de_results$adj.P.Val <=0.05, "gene_name"]
