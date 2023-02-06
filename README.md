@@ -1,7 +1,7 @@
 # RNAseq_2022_Finalproject
 
 ## Description
-This study accomplish a differential expression analysis of RNAseq data from isolated dermal endothelial cells from diabetic and control patients.
+This study accomplishes a differential expression analysis of RNAseq data from isolated dermal endothelial cells from diabetic and control patients.
 
 ## Motivation
 According to the [first *Global report on diabetes](https://www.who.int/publications/i/item/9789241565257)* of the World Health Organization (WHO), the number of adults living with diabetes has almost quadrupled since 1980 to 422 million adults. This dramatic rise is largely due to the rise in type 2 diabetes [[1](https://www.who.int/publications/i/item/9789241565257)]. 
